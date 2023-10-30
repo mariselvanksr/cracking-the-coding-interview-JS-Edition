@@ -2,10 +2,11 @@ class Node {
 	constructor(data) {
 		this.data = data;
 		this.next = null;
+        this.previous = null;
 	}
 }
 
-class SinglyLinkedList {
+class DoublyLinkedList {
 	constructor() {
 		this.head = null;
 		this.size = 0;
@@ -20,9 +21,10 @@ class SinglyLinkedList {
 			let currentNode = this.head;
 
 			while(currentNode.next != null) {
-				currentNode = currentNode.next;
+			    currentNode = currentNode.next;
 			}
 
+            node.previous = currentNode;
 			currentNode.next = node;
 		}
 
@@ -40,7 +42,7 @@ class SinglyLinkedList {
 			this.head = node;
 		} else {
 			let currentNode = this.head;
-			let previousNode = this.head;
+			let previousNode = null;
 
 			let startIndex = 0;
 
@@ -51,8 +53,10 @@ class SinglyLinkedList {
 				startIndex++;
 			}
 
-			previousNode.next = node;
-			node.next = currentNode;
+            node.next = currentNode;
+            node.previous = previousNode;
+            currentNode.previous = node;
+            previousNode.next = node;
 		}
 
 		this.size++;
@@ -63,6 +67,7 @@ class SinglyLinkedList {
 
 		if(index == 0) {
 			this.head = this.head.next;
+            this.head.previous = null;
 		} else {
 			let currentNode = this.head;
 			let previousNode = null;
@@ -70,12 +75,16 @@ class SinglyLinkedList {
 			let startIndex = 0;
 
 			while(startIndex < index) {
-				startIndex++;
 				previousNode = currentNode;
 				currentNode = currentNode.next;
+                startIndex++;
 			}
 
 			previousNode.next = currentNode.next;
+
+            if(currentNode.next) {
+                currentNode.next.previous = previousNode;
+            }
 		}
 
 		this.size--;
@@ -101,8 +110,10 @@ class SinglyLinkedList {
 
 		if(previousNode == null) {
 			this.head = currentNode.next;
+            this.head.previous = null;
 		} else {
 			previousNode.next = currentNode.next;
+            currentNode.next.previous = previousNode;
 		}
 
 		this.size--;
@@ -177,78 +188,80 @@ class SinglyLinkedList {
 
 // Creation of Linked List
 
-const singlyLinkedList = new SinglyLinkedList();
+const doublyLinkedList = new DoublyLinkedList();
 
 // Add values
 
-singlyLinkedList.add(23);
-singlyLinkedList.add(45);
-singlyLinkedList.add(12);
-singlyLinkedList.add(78);
+doublyLinkedList.add(23);
+doublyLinkedList.add(45);
+doublyLinkedList.add(12);
+doublyLinkedList.add(78);
 
-singlyLinkedList.print();
+doublyLinkedList.insertAt(675, 2);
 
-console.log(singlyLinkedList.size_of());
+doublyLinkedList.print();
+
+console.log(doublyLinkedList.size_of());
 
 // Remove Value based on index
 
-singlyLinkedList.removeAt(1);
+doublyLinkedList.removeAt(1);
 
-singlyLinkedList.print();
+doublyLinkedList.print();
 
-console.log(singlyLinkedList.size_of());
+console.log(doublyLinkedList.size_of());
 
 // Element not found
-singlyLinkedList.removeElement(44);
+doublyLinkedList.removeElement(44);
 
 // Element in list - middle
-singlyLinkedList.removeElement(12);
+doublyLinkedList.removeElement(12);
 
-singlyLinkedList.print();
+doublyLinkedList.print();
 
-console.log(singlyLinkedList.size_of());
+console.log(doublyLinkedList.size_of());
 
 // Element in list - start
-singlyLinkedList.removeElement(23);
+doublyLinkedList.removeElement(23);
 
-singlyLinkedList.print();
+doublyLinkedList.print();
 
-console.log(singlyLinkedList.size_of());
+console.log(doublyLinkedList.size_of());
 
 // check is empty
 
-console.log(singlyLinkedList.isEmpty())
+console.log(doublyLinkedList.isEmpty())
 
 // push check
 
-singlyLinkedList.push(44)
-singlyLinkedList.push(89)
-singlyLinkedList.push(23)
+doublyLinkedList.push(44)
+doublyLinkedList.push(89)
+doublyLinkedList.push(23)
 
-singlyLinkedList.print();
-console.log(singlyLinkedList.size_of());
+doublyLinkedList.print();
+console.log(doublyLinkedList.size_of());
 
-singlyLinkedList.pop();
-singlyLinkedList.print();
-console.log(singlyLinkedList.size_of());
-singlyLinkedList.pop();
-singlyLinkedList.print();
-console.log(singlyLinkedList.size_of());singlyLinkedList.pop();
-singlyLinkedList.print();
-console.log(singlyLinkedList.size_of());singlyLinkedList.pop();
-singlyLinkedList.print();
-console.log(singlyLinkedList.size_of());
+doublyLinkedList.pop();
+doublyLinkedList.print();
+console.log(doublyLinkedList.size_of());
+doublyLinkedList.pop();
+doublyLinkedList.print();
+console.log(doublyLinkedList.size_of());doublyLinkedList.pop();
+doublyLinkedList.print();
+console.log(doublyLinkedList.size_of());doublyLinkedList.pop();
+doublyLinkedList.print();
+console.log(doublyLinkedList.size_of());
 
-singlyLinkedList.push(44)
-singlyLinkedList.push(89)
-singlyLinkedList.push(23)
-singlyLinkedList.print();
+doublyLinkedList.push(44)
+doublyLinkedList.push(89)
+doublyLinkedList.push(23)
+doublyLinkedList.print();
 
-singlyLinkedList.unshift(90)
-singlyLinkedList.print();
+doublyLinkedList.unshift(90)
+doublyLinkedList.print();
 
-singlyLinkedList.unshift(87)
-singlyLinkedList.print();
+doublyLinkedList.unshift(87)
+doublyLinkedList.print();
 
-singlyLinkedList.shift();
-singlyLinkedList.print();
+doublyLinkedList.shift();
+doublyLinkedList.print();
