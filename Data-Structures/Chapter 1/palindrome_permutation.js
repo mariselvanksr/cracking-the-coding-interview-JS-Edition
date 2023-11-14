@@ -35,3 +35,24 @@ function findPermutationOfPalindrome(str) {
 
 console.log(findPermutationOfPalindrome('taco cat'));
 console.log(findPermutationOfPalindrome('Tact Coa'));
+
+function findPermutationOfPalindromeWithBitWiseOperation(str) {
+    str = str.replace(' ', '');
+    let bit = 0;
+
+    for(let i = 0; i < str.length; i++) {
+        let charCode = str[i].charCodeAt();
+
+        let mask = 1 << charCode;
+
+        if((bit & mask) === 0) {
+            bit |= mask;
+        } else {
+            bit &= ~mask;
+        }
+    }
+
+    return (bit & (bit - 1)) == 0
+}
+
+console.log(findPermutationOfPalindromeWithBitWiseOperation('taco cat'));
