@@ -128,6 +128,64 @@ class BST {
 
         return tree.value;
     }
+
+    static findMinNode(node) {
+        if(!node.left) return node;
+
+        return this.findMinNode(node.left);
+    }
+
+    static findMaxNode(node) {
+        if(!node.right) return node;
+
+        return this.findMaxNode(node.right);
+    }
+
+    /**
+     * Source: https://levelup.gitconnected.com/deletion-in-binary-search-tree-with-javascript-fded82e1791c
+     */
+
+    remove(value) {
+        this.tree = this.removeNode(this.tree, value);
+    }
+
+    removeNode(node, value) {
+        if(!node) return node;
+
+        if(node.value === value) {
+            if(!node.left && !node.right) {
+                return null;
+            }
+            
+            if(!node.left) {
+                return node.right;
+            }
+            
+            if(!node.right) {
+                return node.left;
+            }
+
+            let tempNode = this.kthNodeFinder(node.right);
+            node.value = tempNode.value;
+            node.right = this.removeNode(node.right, tempNode.value);
+
+            return node;
+        } else if(value < node.value) {
+            node.left = this.removeNode(node.left, value);
+            return node;
+        } else if(value > node.value) {
+            node.right = this.removeNode(node.right, value);
+            return node;
+        }
+    }
+
+    static kthNodeFinder(node) {
+        while(node.left) {
+            node = node.left;
+        }
+
+        return node;
+    }
 }
 
 let bst = new BST();
@@ -147,3 +205,8 @@ console.log(BST.findLowestCommonAncestor(bst.tree, 7, 12));
 console.log(BST.findLowestCommonAncestor(bst.tree, 5, 7));
 console.log(BST.findLowestCommonAncestor(bst.tree, 12, 16));
 console.log(BST.findLowestCommonAncestor(bst.tree, 1, 3));
+console.log(BST.findMinNode(bst.tree));
+console.log(BST.findMaxNode(bst.tree));
+console.log(BST.in_orderTraversal(bst.tree));
+bst.remove(12);
+console.log(BST.in_orderTraversal(bst.tree));
