@@ -65,8 +65,15 @@ class BST {
 
     /**
      * Source: https://www.freecodecamp.org/news/binary-tree-algorithms-for-javascript-beginners/
+     * 
+     * Note: In-Order, Pre-Order, Post-Order traversals are the great variants of DFS(Depth First Search)
+     * 
+     * https://medium.com/basecs/breaking-down-breadth-first-search-cebe696709d9
      */
 
+    /**
+     * In-Order returns sorted array from Binary Search Tree(BST)
+     */
     static in_orderTraversal(root, values = []) {
         if(root) {
             this.in_orderTraversal(root.left, values);
@@ -95,6 +102,29 @@ class BST {
         }
 
         return values;
+    }
+
+    /**
+     * Breath First Search Tree using Queue
+     * 
+     * https://medium.com/basecs/breaking-down-breadth-first-search-cebe696709d9
+     */
+
+    static BreathFirstSearch(node) {
+        let queue = [];
+        let results = [];
+
+        queue.push(node);
+
+        while(queue.length) {
+            let shiftValue = queue.shift();
+            results.push(shiftValue.value);
+
+            if(shiftValue.left) queue.push(shiftValue.left);
+            if(shiftValue.right) queue.push(shiftValue.right);
+        }
+
+        return results;
     }
 
     static maxDepth(tree) {
@@ -210,3 +240,4 @@ console.log(BST.findMaxNode(bst.tree));
 console.log(BST.in_orderTraversal(bst.tree));
 bst.remove(12);
 console.log(BST.in_orderTraversal(bst.tree));
+console.log(BST.BreathFirstSearch(bst.tree));
