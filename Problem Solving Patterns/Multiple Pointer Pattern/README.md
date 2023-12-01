@@ -1,9 +1,9 @@
 # Multiple Pointer Pattern
 
-    Creating **Pointers** that corresponds to index/position and move the pointers to end or middle or to start based on some conditions. Very effective for minimal lookup and reduce time complexity.
+    Creating Pointers that corresponds to index/position and move the pointers to end or middle or to start based on some conditions. Very effective for minimal lookup and reduce time complexity.
 
 ## Example:
-    Write a function called SumZero which accepts sorted array of integers. the function should find the first pair which sums up to zero.
+    Write a function called SumZero which accepts sorted array of integers. The function should find the first pair which sums up to zero.
 
 ### Solution 1: Brute Force Approach
 
@@ -36,4 +36,3 @@ If we take a closer look the problem stats, the array is sorted. That means all 
 - Do this until we have P1 < P2
 - If sum is zero in any case return [P1, P2]
 - Else return [] / False
-
