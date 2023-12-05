@@ -14,25 +14,23 @@ function countZeroes(arr) {
 
     let start = 0;
     let end = arr.length - 1;
-    let zeroStartPoint = arr.length - 1;
+    let mid = start + Math.floor((end - start) / 2);
 
     while(start <= end) {
-        let mid = start + Math.floor((end - start) / 2);
-
-        if(arr[mid] === 0 && (arr[mid - 1] === 1 || mid === 0)) {
-            zeroStartPoint = mid;
-            
+        if((mid == 0 || arr[mid - 1] === 1) && arr[mid] === 0) {
             break;
         }
 
-        if(arr[mid] === 0 && arr[mid - 1] === 0) {
-            end = mid - 1;
-        } else {
+        if(arr[mid] === 1) {
             start = mid + 1;
+        } else {
+            end = mid - 1;
         }
+
+        mid = start + Math.floor((end - start) / 2);
     }
 
-    return arr.length - zeroStartPoint;
+    return arr.length - mid;
 }
 
 console.log(countZeroes([1,1,1,1,0,0]))
