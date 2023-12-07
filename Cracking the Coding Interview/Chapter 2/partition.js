@@ -52,4 +52,34 @@ function partitionLinkedList(node, x) {
     beforeNodeTail.next = afterNodeHead
 
     return beforeNodeHead;
+} 
+
+/**
+ * If we look at the first solution we can see that we have to keep track of lot of new variables at each time.
+ * But, we can use the existing linked list for this as well. Specifically, if the interviewer didn't said specifically
+ * about not collapsing the existing linked list.
+ */
+
+function partitionLinkedListUsingExistingList(node, x) {
+    let head = node;
+    let tail = node;
+
+    while(node != null) {
+        let nextNode = node.next;
+        
+        if (node.value < x) {
+            node.next = head;
+            head = node;
+        } else {
+            tail.next = node;
+            tail = node;
+        }
+
+        node = nextNode;
+    }
+
+    tail.next = null;
+
+    // return new head value since old is now changed.
+    return head;
 }
