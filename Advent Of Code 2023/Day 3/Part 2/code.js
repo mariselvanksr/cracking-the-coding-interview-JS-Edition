@@ -33,8 +33,6 @@ function main() {
         });
     });
 
-    console.log(numbersAddressMap)
-    
     let totalGearValues = 0;
 
     mapOfEngineData.forEach((row, rowIndex) => {
@@ -108,7 +106,6 @@ function calculateAdjutantValues(rowIndex, colIndex, numbersAddressMap, rowCount
         ...new Set(adjutantValuesInBottomRow),
     ];
 
-    console.log(adjutantValues)
     // we need to calculate exactly for two
     return adjutantValues.length === 2 ? (parseInt(adjutantValues[0]) * parseInt(adjutantValues[1])) : 0;
 }
