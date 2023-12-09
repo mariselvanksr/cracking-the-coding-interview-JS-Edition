@@ -38,3 +38,44 @@ function checkPalindrome(node) {
 
     return true;
 }
+
+/**
+ * Iterative Approach using fast and slow runner technique.
+ * 
+ * If you know the size of the linked list you can simply push the first half into an stack and 
+ * compare the second half with the linked list by pop each item from the stack.
+ * 
+ * Else we can use the fast and slow runner idea, where fast pointer jumps two node at a time and slow node jumps only one node and when fast node hits end we know the node in the mid. But if it's odd count we have to handle that as well.
+ */
+
+function checkPalindromeUsingFastAndSlow(node) {
+    let fast = node;
+    let slow = node;
+    let stack = [];
+
+    while(fast != null && fast.next != null) {
+        stack.push(slow.data);
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+
+    /** 
+     * If it's odd count fast will be never an null. Do your own calculation :) 
+     * In this case we are not comparing the middle node.
+     * */
+    if (fast != null) {
+        slow = slow.next;
+    }
+
+    while(slow != null) {
+        let data = slow.data;
+
+        if(stack.pop() !== data) {
+            return false;
+        }
+
+        slow = slow.next;
+    }
+
+    return true;
+}
