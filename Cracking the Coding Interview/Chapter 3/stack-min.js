@@ -77,3 +77,10 @@ console.log(stack.getMin())
 stack.pop()
 console.log(stack.getMin())
 stack.pop()
+
+/**
+ * Instead of using an Node we can use an additional array to store the min elements at each time
+ * the push happens. This will slightly reduce the space by not using object structure.
+ * 
+ * I'm not going to implement that now. Feel free to try by yourself.
+ */
