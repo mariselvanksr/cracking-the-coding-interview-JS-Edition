@@ -38,3 +38,8 @@ function sortWithStack(s1) {
 }
 
 console.log(sortWithStack([7,3,5,6,10]));
+
+/**
+ * Time Complexity O(n^2)
+ * Space Complexity O(n)
+ */
