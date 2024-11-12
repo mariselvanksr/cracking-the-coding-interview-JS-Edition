@@ -5,6 +5,11 @@ function containsDuplicate(nums) {
         tempSet.add(num);
     }
 
+    /**
+     * Or you can directly use
+     * new Set(nums)
+     */
+
     return tempSet.size !== nums.length;
 }
 
