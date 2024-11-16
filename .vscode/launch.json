@@ -7,11 +7,12 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Run Current File",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/Blind 75/product_except_self.js"
+            "cwd": "${workspaceFolder}",
+            "program": "${file}"
         }
     ]
 }
