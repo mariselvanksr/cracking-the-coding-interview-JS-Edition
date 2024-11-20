@@ -8,4 +8,15 @@ function findMissingNumber(nums) {
     return xor;
 }
 
-console.log(findMissingNumber([2,0,1]));
+function findMissingNumberWithSet(nums) {
+    let set = new Set(nums);
+
+    for(let i = 0; i < nums.length; i++) {
+        if(!set.has(i)) {
+            return i;
+        }
+    }
+}
+
+console.log(findMissingNumber([3,0,1]));
+console.log(findMissingNumberWithSet([3,0,1]));
